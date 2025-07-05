@@ -22,6 +22,8 @@ pip install pycryptodome
 pip install sqlcipher3-wheels
 ```
 
+<br><br>
+
 ## 🔧 코드 설명
 
 - pull.py
