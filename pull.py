@@ -29,6 +29,6 @@ def pull_all_artifacts():
     
     su_pull("/data/misc/keystore/persistent.sqlite", "persistent.sqlite")
 
-# 실행
+
 if __name__ == "__main__":
     pull_all_artifacts()
