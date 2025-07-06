@@ -1,4 +1,4 @@
-# decrypted_files
+# des_database_files
 
 이 폴더는 복호화가 완료된 Session 메신저의 데이터베이스 파일들을 저장하는 공간입니다.  
 복호화된 결과물은 `.sqlite` 확장자로 저장되며, 다음과 같은 형태로 변환됩니다:

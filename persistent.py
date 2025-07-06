@@ -5,7 +5,7 @@ def extract_all_signalsecret_keys(sqlite_path):
         conn = sqlite3.connect(sqlite_path)
         cursor = conn.cursor()
 
-        
+
         cursor.execute("SELECT id FROM keyentry WHERE alias = 'SignalSecret'")
         results = cursor.fetchall()
 
@@ -17,7 +17,7 @@ def extract_all_signalsecret_keys(sqlite_path):
         for idx, (key_id,) in enumerate(results):
             print(f"[+] SignalSecret #{idx+1} id: {key_id}")
 
-            
+
             cursor.execute("SELECT blob FROM blobentry WHERE keyentryid = ?", (key_id,))
             blob_result = cursor.fetchone()
             if not blob_result:

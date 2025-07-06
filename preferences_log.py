@@ -8,16 +8,16 @@ def extract_and_convert_data_iv(xml_path):
         root = tree.getroot()
 
         for elem in root.findall("string"):
-            if elem.attrib.get("name") == "pref_database_encrypted_secret":
+            if elem.attrib.get("name") == "pref_log_encrypted_secret":
                 json_str = elem.text
                 data_obj = json.loads(json_str)
 
-                
+                # base64 디코딩
                 data_bytes = base64.b64decode(data_obj["data"])
                 iv_b64 = data_obj["iv"]
                 iv_bytes = base64.b64decode(iv_b64)
 
-                
+                # 분리
                 ciphertext = data_bytes[:-16]
                 gcm_tag = data_bytes[-16:]
 
@@ -28,7 +28,7 @@ def extract_and_convert_data_iv(xml_path):
 
                 return ciphertext, gcm_tag, iv_bytes
 
-        print("[!] 'pref_database_encrypted_secret' 항목을 찾을 수 없습니다.")
+        print("[!] 'pref_log_encrypted_secret' 항목을 찾을 수 없습니다.")
         return None, None, None
 
     except Exception as e:

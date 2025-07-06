@@ -9,6 +9,9 @@ Session 메신저의 내부 데이터 복호화에 필요한 원본 파일들을
 - `/data/data/network.loki.messenger/databases/session.db`  
   → Session 메시지 DB
 
+  - `/data/data/network.loki.messenger/cache/log/log-~`  
+    → Session 메시지 Log
+
 - `/data/data/network.loki.messenger/shared_prefs/network.loki.messenger_preferences.xml`  
   → Session 앱 설정 및 암호화 키 정보
 
