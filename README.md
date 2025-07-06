@@ -11,7 +11,7 @@ git clone https://github.com/jun8907/Session_auto_descrypt_db.git
 cd Session_auto_descrypt_db
 pip install -r requirements.txt
 python pull.py
-python decrypt_db.py
+python decrypt_db_log.py
 ```
 
 <br><br>
