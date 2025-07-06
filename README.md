@@ -1,4 +1,4 @@
-# Session_auto_descrypt_db 🔐
+# Session_auto_descrypt_db-log 🔐
 
 복호화되지 않은 Session 메신저의 session.db 파일을 복호화하는 코드입니다.
 
@@ -54,7 +54,7 @@ db 파일과 복호화에 필요한 파일들은 `extracted_files/` 디렉터리
 [+] 추출 완료: extracted_files\persistent.sqlite
 ```
 <br><br>
-### preferences_attachment, database.py
+### preferences_log, database.py
 
 Session 메신저의 /share_pref/org.thoughtcrime.securesms_preferences.xml 파일에서 SQLCipher에 사용된 패스프레이즈를 추출
 - `data (hex)`
@@ -91,7 +91,7 @@ Android의 Signal 메신저에서 추출한 설정 파일 (`shared_prefs`)과 �
 [+] 복호화 성공! SQLCipher Key (hex): 9a177c5296dedc24cf72cd563c39d3234e616f4ab2c596696ed27411d65fde94
 ```
 <br><br>
-### descrypt_db.py
+### descrypt_db_log.py
 
 암호화된 Session 데이터베이스(`session.db`)를 복호화하여 일반 SQLite 형식으로 변환 및 저장해주는 코드 입니다.
 
