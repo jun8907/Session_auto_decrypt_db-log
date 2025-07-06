@@ -83,8 +83,12 @@ Android 기기에서 추출한 Session 메신저의 `persistent.sqlite` 키스�
 <br><br>
 ### descrypt_key.py
 
-Android의 Session 메신저에서 추출한 설정 파일 (`shared_prefs`)과 키 저장소(`persistent.sqlite`)를 이용하여, SQLCipher로 암호화된 Session DB의 복호화 키(SQLCipher Key)를 자동으로 복원해주는 코드 입니다.
-<br><br>
+Android의 Signal 메신저에서 추출한 설정 파일 (`shared_prefs`)과 키 저장소(`persistent.sqlite`)를 이용하여, SQLCipher로 암호화된 Signal DB의 복호화 키(SQLCipher Key)를 자동으로 복원해주는 코드 입니다.
+
+```python
+[실행 결과]
+[+] 복호화 성공! SQLCipher Key (hex): 9a177c5296dedc24cf72cd563c39d3234e616f4ab2c596696ed27411d65fde94
+```
 <br><br>
 ### descrypt_db.py
 
