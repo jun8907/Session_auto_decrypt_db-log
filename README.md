@@ -7,8 +7,8 @@
 ## 🧪 사용법
 
 ```bash
-git clone https://github.com/jun8907/Session_auto_descrypt_db.git
-cd Session_auto_descrypt_db
+git clone https://github.com/jun8907/Session_auto_descrypt_db-log.git
+cd Session_auto_descrypt_db-log
 pip install -r requirements.txt
 python pull.py
 python decrypt_db_log.py
