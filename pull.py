@@ -21,19 +21,15 @@ def pull_all_artifacts():
 
     package = "network.loki.messenger"
 
-    # 1. preferences 설정 파일
     su_pull(f"/data/data/{package}/shared_prefs/{package}_preferences.xml",
             os.path.join("extracted_files", f"{package}_preferences.xml"))
     
-    # 2. 키스토어 파일
     su_pull("/data/misc/keystore/persistent.sqlite",
             os.path.join("extracted_files", "persistent.sqlite"))
 
-    # ✅ 3. session.db 추가 추출
     su_pull(f"/data/data/{package}/databases/session.db",
             os.path.join("extracted_files", "session.db"))
 
-    # 4. 로그 디렉터리 내부 파일 전부 추출
     print("[*] 로그 파일 목록 가져오는 중...")
     result = subprocess.run(
         ["adb", "shell", f"su -c 'ls /data/data/{package}/cache/log/'"],
