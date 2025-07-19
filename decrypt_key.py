@@ -21,13 +21,13 @@ def get_sqlcipher_key(xml_path, key_list, label):
 
 
 def get_sqlcipher_keys():
-    # SignalSecret 키 리스트
+    
     sqlite_path = "extracted_files/persistent.sqlite"
     key_list = extract_all_signalsecret_keys(sqlite_path)
     if not key_list:
         return None, None
 
-    # XML 추출 및 복호화 시도
+    
     log_iv = extract_log_iv("extracted_files/network.loki.messenger_preferences.xml")
     db_iv = extract_db_iv("extracted_files/network.loki.messenger_preferences.xml")
 
@@ -35,14 +35,14 @@ def get_sqlcipher_keys():
         print("[!] XML에서 IV 추출 실패")
         return None, None
 
-    # 각각 복호화
+    
     log_key = get_sqlcipher_key(log_iv, key_list, "로그 DB")
     db_key = get_sqlcipher_key(db_iv, key_list, "메시지 DB")
 
     return log_key, db_key
 
 
-# 테스트용 실행
+
 if __name__ == "__main__":
     log_key, db_key = get_sqlcipher_keys()
     print(f"\n[최종 결과] 로그 키: {log_key}")

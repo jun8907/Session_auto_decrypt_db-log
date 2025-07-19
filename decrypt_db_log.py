@@ -64,7 +64,7 @@ for fn in os.listdir(log_dir):
 # ───────────────────────────────
 def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
     try:
-        # 2‑1) SQLCipher DB 열고 복호화
+        # SQLCipher DB 열고 복호화
         conn = sqlcipher.connect(encrypted_db_path)
         cur = conn.cursor()
         cur.execute(f"PRAGMA key = '{key_plaintext}';")
@@ -75,7 +75,7 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
         cur.execute("SELECT count(*) FROM sqlite_master;")
         print(f"[*] 복호화 성공: {encrypted_db_path}")
 
-        # 2‑2) 새 SQLite DB로 백업 (sqlite_sequence 제외, FTS5 제외)
+        # 새 SQLite DB로 백업 
         print(f"[*] 백업 중 → {output_db_path}")
         with sqlite3.connect(output_db_path) as out_conn:
             out_cur = out_conn.cursor()
@@ -86,10 +86,10 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
                 if not ddl or "fts5" in ddl.lower():
                     continue
                 out_cur.execute(ddl)
-                # 복사할 컬럼 목록 조회
+                
                 cur.execute(f"PRAGMA table_info({name})")
                 cols = [c[1] for c in cur.fetchall()]
-                # 레코드 복사
+                
                 cur.execute(f"SELECT * FROM {name}")
                 rows = cur.fetchall()
                 if not rows:
@@ -105,7 +105,7 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
         conn.close()
         print(f"[+] DB 백업 완료: {output_db_path}")
 
-        # 2‑3) CSV/XML 내보내기
+        # CSV/XML 내보내기
         base    = os.path.splitext(os.path.basename(output_db_path))[0]
         parent  = os.path.dirname(output_db_path)
         csv_dir = os.path.join(parent, f"{base}_csv")
@@ -119,21 +119,21 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
             tables = [t[0] for t in exp_cur.fetchall()]
 
             for tbl in tables:
-                # 컬럼 정보 조회
+                
                 exp_cur.execute(f"PRAGMA table_info({tbl})")
                 cols = [c[1] for c in exp_cur.fetchall()]
 
-                # sms 테이블에 누락된 필드가 있다면 강제로 삽입
+                
                 if tbl == 'sms':
                     for extra in ('is_deleted','is_group_update'):
                         if extra not in cols:
                             cols.append(extra)
 
-                # 데이터 가져오기 (SELECT * 은 여전히 모든 컬럼을 반환)
+                
                 exp_cur.execute(f"SELECT * FROM {tbl}")
                 rows = exp_cur.fetchall()
 
-                # --- CSV 저장 ---
+                # CSV 저장
                 csv_path = os.path.join(csv_dir, f"{tbl}.csv")
                 with open(csv_path, "w", newline="", encoding="utf-8-sig") as f:
                     writer = csv.writer(f)
@@ -141,7 +141,7 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
                     for row in rows:
                         out = []
                         row = list(row)
-                        # row 길이와 cols 길이 차이 보정
+                        
                         if len(row) < len(cols):
                             row += [''] * (len(cols)-len(row))
                         for col_name, val in zip(cols, row):
@@ -153,7 +153,7 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
                         writer.writerow(out)
                 print(f"[+] CSV 저장: {csv_path}")
 
-                # --- XML 저장 ---
+                # XML 저장
                 root = ET.Element(f"{tbl}_rows")
                 for row in rows:
                     r = list(row)
@@ -177,7 +177,7 @@ def decrypt_and_export_db(encrypted_db_path, output_db_path, key_plaintext):
         print(f"[!] 복호화/백업/내보내기 실패: {e}")
         return False
 
-# 3. 실행
+
 os.makedirs("dec_database_files", exist_ok=True)
 for enc, out in [("extracted_files/session.db", "dec_database_files/dec_session.sqlite")]:
     decrypt_and_export_db(enc, out, db_key_hex)
