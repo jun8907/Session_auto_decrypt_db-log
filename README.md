@@ -1,4 +1,4 @@
-# Session_auto_descrypt_db-log 🔐
+# Session_auto_decrypt_db-log 🔐
 
 복호화되지 않은 Session 메신저의 session.db 파일을 복호화하는 코드입니다.
 
@@ -7,8 +7,8 @@
 ## 🧪 사용법
 
 ```bash
-git clone https://github.com/jun8907/Session_auto_descrypt_db-log.git
-cd Session_auto_descrypt_db-log
+git clone https://github.com/jun8907/Session_auto_decrypt_db-log.git
+cd Session_auto_decrypt_db-log
 pip install -r requirements.txt
 python pull.py
 python decrypt_db_log.py
@@ -31,8 +31,8 @@ pip install sqlcipher3-wheels
 - preferences_log.py
 - preferences_database.py
 - persistent.py
-- descrypt_key.py
-- descrypt_db_log.py
+- decrypt_key.py
+- decrypt_db_log.py
 <br><br>
 ### pull.py
 
@@ -94,7 +94,7 @@ Android 기기에서 추출한 Session 메신저의 `persistent.sqlite` 키스�
     → 추출된 복호화 키 (16바이트 hex): d843d662011f92d82c69659c4311904f
 ```
 <br><br>
-### descrypt_key.py
+### decrypt_key.py
 
 Android의 Session 메신저에서 추출한 설정 파일 (`shared_prefs`)과 키 저장소(`persistent.sqlite`)를 이용하여, SQLCipher로 암호화된 Session DB의 복호화 키(SQLCipher Key)를 자동으로 복원해주는 코드 입니다.
 
@@ -107,17 +107,17 @@ Android의 Session 메신저에서 추출한 설정 파일 (`shared_prefs`)과 �
 [+] 메시지 DB 복호화 성공! SQLCipher Key (hex): e0ec6de02a377c48b179351992ade4982540ba184324e24f9f92b8795f679696
 ```
 <br><br>
-### descrypt_db_log.py
+### decrypt_db_log.py
 
 암호화된 Session 데이터베이스(`session.db`)와 로그(`log-~`)를 복호화하여 일반 SQLite, 텍스트 형식으로 변환 및 저장해주는 코드 입니다.
 
 ```python
 [실행 결과]
-[+] 로그 파일 백업 완료: des_log_files\log-1751743631147_dec.txt
+[+] 로그 파일 백업 완료: dec_log_files\log-1751743631147_dec.txt
 [+] 복호화 성공!
-[*] 백업 중 → des_database_files/des_session.sqlite
+[*] 백업 중 → dec_database_files/dec_session.sqlite
 [!] FTS5 테이블 제외됨: sms_fts
 [!] FTS5 테이블 제외됨: mms_fts
 [!] FTS5 테이블 제외됨: emoji_search
-[+] DB 파일 백업 완료: des_database_files/des_session.sqlite
+[+] DB 파일 백업 완료: dec_database_files/dec_session.sqlite
 ```
