@@ -7,11 +7,11 @@
 ## 🧪 사용법
 
 ```bash
-git clone https://github.com/jun8907/Session_auto_decrypt_db-log.git
-cd Session_auto_decrypt_db-log
-pip install -r requirements.txt
-python pull.py
-python decrypt_db_log.py
+> git clone https://github.com/jun8907/Session_auto_decrypt_db-log.git
+> cd Session_auto_decrypt_db-log
+> pip install -r requirements.txt
+> python pull.py
+> python decrypt_db_log.py
 ```
 
 <br><br>
@@ -19,8 +19,8 @@ python decrypt_db_log.py
 ## 📖 관련 라이브러리 설치
 
 ```bash
-pip install pycryptodome
-pip install sqlcipher3-wheels
+> pip install pycryptodome
+> pip install sqlcipher3-wheels
 ```
 
 <br><br>
